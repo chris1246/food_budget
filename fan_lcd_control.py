@@ -8,16 +8,17 @@ cpu = CPUTemperature()
 fan_relay = 22
 led_pin = 18
 max_temp = 50
+on_timer = 100 # seconds
+
 GPIO.setup(fan_relay, GPIO.OUT)
 GPIO.setup(led_pin, GPIO.OUT)
 
 try:
     while True:
         GPIO.output(led_pin, 1)
-
         if cpu.temperature > max_temp:
             GPIO.output(fan_relay, 1)
-            time.sleep(30)
+            time.sleep(on_timer)
         else:
             GPIO.output(fan_relay, 0)
 
