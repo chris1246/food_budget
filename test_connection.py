@@ -5,4 +5,4 @@ object = push.gateway()
 
 table = "python_creation_table"
 data = "hello world"
-print(object.upload(data, table, ))
+print(object.upload(data, table))
