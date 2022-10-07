@@ -10,7 +10,7 @@ class gateway():
         self.create_cursor = self.mariadb_connection.cursor()
 
     def upload(self, print_data, table):
-        sql_statement = f'INSERT INTO {0} (COLUMN1, COLUMN2) VALUES ("hi",5), ("hi",6)';
+        sql_statement = f'INSERT INTO {table} (COLUMN1, COLUMN2) VALUES ("hi",5), ("hi",6)';
         self.create_cursor.execute(sql_statement)
         self.mariadb_connection.commit();
         
