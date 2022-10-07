@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-import py_scripts.push as push
+import push
 object = push.gateway()
 
 
