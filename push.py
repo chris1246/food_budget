@@ -9,13 +9,13 @@ class gateway():
                                     port='3306')
         self.create_cursor = self.mariadb_connection.cursor()
 
-    def upload(self, insertion_data):
-        sql_statement = 'INSERT INTO python_creation_table (COLUMN1, COLUMN2) VALUES ("hi",5), ("hi",6)';
+    def upload(self, print_data, table):
+        sql_statement = f'INSERT INTO {0} (COLUMN1, COLUMN2) VALUES ("hi",5), ("hi",6)';
         self.create_cursor.execute(sql_statement)
         self.mariadb_connection.commit();
         
         
         self.mariadb_connection.close()
-        return f"{insertion_data}"
+        return f"{print_data}"
 
         
