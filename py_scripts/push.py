@@ -1,4 +1,11 @@
-from gc import is_finalized
+# File: push.py     Function: db uploader   Type: script
+# 
+# Script input parameters:
+#   object.verify(data, table)
+#       table = "test_table"
+#       data = {'ID': 3, 'COLUMN1':'Alpha', 'COLUMN2': 'Beta'}
+#
+#
 import mysql.connector as mariadb
 import json
 
