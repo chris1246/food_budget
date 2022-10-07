@@ -10,4 +10,4 @@ create_cursor = mariadb_connection.cursor()
 create_cursor.execute("SHOW COLUMNS FROM Meals;")
 #create_cursor.execute("SHOW TABLES;")
 for x in create_cursor:
-    print(x)
+    print(x[0])
