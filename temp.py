@@ -1,3 +1,6 @@
-from gpiozero import CPUTemperature
+from gpiozero import CPUTemperature, DiskUsage
 cpu = CPUTemperature()
-print(cpu.temperature)
+disk = DiskUsage()
+
+print(f'CPU Temperature: {cpu.temperature}')
+print(f'Current disk usage: {disk.usage}%')
