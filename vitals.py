@@ -8,8 +8,8 @@ stat = shutil.disk_usage(path)
 
 
 print(f'CPU Temperature: {cpu.temperature}')
-print(f'Current disk usage: {disk.usage}%')
-
-print(f"Disk usage statistics:{stat}")
+print(f'Internal disk usage: {disk.usage}%')
+calc = (stat[1] / stat[0]) * 100
+print(f"External disk usage: {calc}%")
 
 #Ping server
