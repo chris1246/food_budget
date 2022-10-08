@@ -1,3 +1,5 @@
+# File: test_connection.py     Function: test platform for oploading data through push.py   Type: script
+
 from dataclasses import dataclass
 import push
 object = push.gateway()

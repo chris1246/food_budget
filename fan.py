@@ -1,3 +1,7 @@
+# File: fan.py     Function: active cooling for pi   Type: always running script
+# 
+# configured to run at boot
+# made to be as simple as possible
 from gpiozero import CPUTemperature
 import RPi.GPIO as GPIO
 import sys
@@ -5,8 +9,8 @@ import time
 
 cpu = CPUTemperature()
 
-fan_relay = 22
-led_pin = 18
+fan_relay = 22 #GPIO22
+led_pin = 18 #GPIO18
 max_temp = 50
 on_timer = 100 # seconds
 
