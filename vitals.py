@@ -4,7 +4,7 @@ import psutil
 
 cpu = CPUTemperature()
 disk = DiskUsage()
-path = "/media/pi/Sanne Data"
+path = "/media/pi/Samsung_SSD"
 stat = shutil.disk_usage(path)
 calc = ((stat[1] / stat[0]) * 100)
 
