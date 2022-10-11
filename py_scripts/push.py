@@ -8,6 +8,7 @@
 #
 import mysql.connector as mariadb
 import json
+import retrieve_hidden_info
 
 class gateway():
     def __init__(self) -> None:
@@ -17,12 +18,14 @@ class gateway():
             data = json.load(f)
         for i in range(len(data)):
             credentials.append(data[a[i]])
+
+        self.data = retrieve_hidden_info.json_data() 
         
-        self.mariadb_connection = mariadb.connect(user=f'{credentials[0]}', 
-                                    password=f'{credentials[1]}', 
-                                    database=f'{credentials[2]}', 
-                                    host=f'{credentials[3]}', 
-                                    port=f'{credentials[4]}')
+        self.mariadb_connection = mariadb.connect(user=f'{self.data.retrieve("user")}', 
+                                    password=f'{self.data.retrieve("password")}', 
+                                    database=f'{self.data.retrieve("database")}', 
+                                    host=f'{self.data.retrieve("host")}', 
+                                    port=f'{self.data.retrieve("port")}')
         self.create_cursor = self.mariadb_connection.cursor()
         
     def verify(self, data, table): 
