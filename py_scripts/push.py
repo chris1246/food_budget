@@ -12,15 +12,7 @@ import retrieve_hidden_info
 
 class gateway():
     def __init__(self) -> None:
-        a = ['user', 'password', 'database', 'host', 'port']
-        credentials = []
-        with open('connection_parameters.json') as f:
-            data = json.load(f)
-        for i in range(len(data)):
-            credentials.append(data[a[i]])
-
         self.data = retrieve_hidden_info.json_data() 
-        
         self.mariadb_connection = mariadb.connect(user=f'{self.data.retrieve("user")}', 
                                     password=f'{self.data.retrieve("password")}', 
                                     database=f'{self.data.retrieve("database")}', 
