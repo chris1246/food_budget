@@ -4,13 +4,15 @@ import traceback
 import sys
 import time
 import pdf_data
+import retrieve_hidden_info
 
 class MailChecker():
     def __init__(self) -> None:
+        self.data = retrieve_hidden_info.json_data() 
         self.host = "imap.gmail.com"
-        self.username = "*"
-        self.password = '*'
-        self.download_folder = "*"
+        self.username = f"{self.data.retrieve("username")}"
+        self.password = f"{self.data.retrieve("mail_password")}"
+        self.download_folder = f"{self.data.retrieve("path")}"
         self.object = pdf_data.reader()
         self.mail = Imbox(self.host, username=self.username, password=self.password, ssl=True, ssl_context=None, starttls=False)
         self.messages = self.mail.messages()
