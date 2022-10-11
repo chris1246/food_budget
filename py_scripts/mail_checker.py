@@ -10,9 +10,9 @@ class MailChecker():
     def __init__(self) -> None:
         self.data = retrieve_hidden_info.json_data() 
         self.host = "imap.gmail.com"
-        self.username = f"{self.data.retrieve("username")}"
-        self.password = f"{self.data.retrieve("mail_password")}"
-        self.download_folder = f"{self.data.retrieve("path")}"
+        self.username = f'{self.data.retrieve("username")}'
+        self.password = f'{self.data.retrieve("mail_password")}'
+        self.download_folder = f'{self.data.retrieve("path")}'
         self.object = pdf_data.reader()
         self.mail = Imbox(self.host, username=self.username, password=self.password, ssl=True, ssl_context=None, starttls=False)
         self.messages = self.mail.messages()
@@ -32,19 +32,15 @@ class MailChecker():
                     for idx, attachment in enumerate(message.attachments):
                         try:
                             sndr = message.sent_from
-                            #print(sndr[0])
                             att_fn = attachment.get('filename')
                             download_path = f"{self.download_folder}/{att_fn}"
-                            #print(download_path)
                             with open(download_path, "wb") as fp:
                                 fp.write(attachment.get('content').read())
-                                #print(attachment.get('content').read())
-                                self.sender(att_fn, sndr)
-                                
+                                self.sender(att_fn, sndr, self.download_folder)
                         except:
                             print(traceback.print_exc())
-    def sender(self, att_fn, sndr):
-        self.object.reciever(att_fn, sndr)
+    def sender(self, att_fn, sndr, path):
+        self.object.reciever(att_fn, sndr, path)
         unread_inbox_messages = self.mail.messages(unread=True)
         print("sender")
         if len(unread_inbox_messages) == 0:

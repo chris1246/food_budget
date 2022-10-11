@@ -1,6 +1,7 @@
 import PyPDF2
 from datetime import datetime
 import re
+import os
 
 
 
@@ -16,17 +17,17 @@ class reader():
         self.adjust = 0
         pass
 
-    def reciever(self, insertion_data, sender):
+    def reciever(self, insertion_data, sender, path):
         self.sender = sender
         print(self.sender[0])
         self.status = True
         now = datetime.now()
         timestamp = datetime.timestamp(now)
-        pdfFile = f"{insertion_data}"
+        pdfFile = f"{path}/{insertion_data}"
         pdfRead = PyPDF2.PdfFileReader(pdfFile)
         page = pdfRead.getPage(0)
         self.pageContent = page.extractText()
-        
+        os.remove(f"{path}/{insertion_data}")
         self.find_store()
 
 
