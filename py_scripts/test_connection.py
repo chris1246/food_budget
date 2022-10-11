@@ -5,7 +5,7 @@ import push
 object = push.gateway()
 
 
-#table = "python_creation_table"
+#table = "python_creation_table"#
 table = "test_table"
 data = {'ID': 3, 'COLUMN1':'Alpha', 'COLUMN2': 'Beta'}
 #data = {'COLUMN1':'hh', 'COLUMN2': 2}
