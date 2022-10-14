@@ -3,7 +3,8 @@ from imbox import Imbox
 import traceback
 import sys
 import time
-import pdf_data
+#import pdf_data
+import receipt_data
 import retrieve_hidden_info
 
 class MailChecker():
@@ -13,14 +14,15 @@ class MailChecker():
         self.username = f'{self.data.retrieve("username")}'
         self.password = f'{self.data.retrieve("mail_password")}'
         self.download_folder = f'{self.data.retrieve("path")}'
-        self.object = pdf_data.reader()
+        self.object = receipt_data.reader() ####################
         self.mail = Imbox(self.host, username=self.username, password=self.password, ssl=True, ssl_context=None, starttls=False)
         self.messages = self.mail.messages()
+        self.run = True
         print("Checker begun")
         self.checker()
 
     def checker(self):        
-        while True:
+        while(self.run ==True):
             unread_inbox_messages = self.mail.messages(unread=True)
             if len(unread_inbox_messages) == 0:
                 pass
@@ -42,7 +44,7 @@ class MailChecker():
     def sender(self, att_fn, sndr, path):
         self.object.reciever(att_fn, sndr, path)
         unread_inbox_messages = self.mail.messages(unread=True)
-        print("sender")
+        
         if len(unread_inbox_messages) == 0:
             self.checker()
 

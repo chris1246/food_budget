@@ -5,7 +5,7 @@
 #       table = "test_table"
 #       data = {'ID': 3, 'COLUMN1':'Alpha', 'COLUMN2': 'Beta'}
 #
-#
+# 
 import mysql.connector as mariadb
 import json
 import retrieve_hidden_info
