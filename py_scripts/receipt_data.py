@@ -125,7 +125,7 @@ class reader():
                             print(f"Found {initial_search} on same line +{amount} as first item")
                             words_for_line = txt_line[line_srch].split()
                             for words in range(len(words_for_line)):
-                                find_quant = re.search(words_for_line)
+                                find_quant = re.search(initial_search, words_for_line)
                                 if srch_proximity:
                                     parameters_dict['item'] = words
                                 if find_quant:
