@@ -133,7 +133,7 @@ class reader():
                                     parameters_dict['quant'] = words_for_line[words]
                                     parameters_dict['quant_loc'] = words
                                 print(parameters_dict)
-                                break
+                                
                         break
 
                 self.parameters.append(initial_search)
