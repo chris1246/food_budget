@@ -128,9 +128,11 @@ class reader():
                                 find_quant_on_line = re.search(initial_search, words_for_line[words])
                                 if srch_proximity:
                                     parameters_dict['item'] = words_for_line[words]
+                                    parameters_dict['item_loc'] = words
                                 if find_quant_on_line:
-                                    diff = words - parameters_dict['item']
-                                    parameters_dict['diff'] = diff
+                                    parameters_dict['quant'] = words_for_line[words]
+                                    parameters_dict['quant_loc'] = words
+                                    
                                     
 
                                 print(parameters_dict)
