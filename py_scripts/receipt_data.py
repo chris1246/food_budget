@@ -99,6 +99,7 @@ class reader():
     def parameters_creator(self):
         indexes = ['Input name of store: ','Enter the name of the first item: ','Enter quantity of first item: ','Enter price of first item: ','Enter the name of the last item: ']
         self.parameters = []
+        parameters_dict = {}
         txt_line = self.lines
         for i in range(len(indexes)):
             initial_search = input(f"{indexes[i]}")
@@ -108,21 +109,32 @@ class reader():
             self.search_list.clear()
             print(self.items_found)
             if(len(self.items_found) > 0):
+
                 #print(f"Found {len(self.items_found)} examples of {initial_search}")
                 if i == 1:
                     #index_range = len[self.on_line]
                     line_srch = self.on_line[len(self.on_line)-1]
                     
                 if i == 2:
-
-                    
                     for i in range(len(txt_line)):
+                        
                         srch_proximity = re.search(initial_search.lower(), txt_line[line_srch].lower())
                         if srch_proximity:
                             amount = i
+                            parameters_dict['line'] = self.lines[line_srch]
                             print(f"Found {initial_search} on same line +{amount} as first item")
-                            words_for_quant = txt_line[line_srch].split()
-                            print(words_for_quant[0])
+                            words_for_line = txt_line[line_srch].split()
+                            for words in range(len(words_for_line)):
+                                find_quant = re.search(words_for_line)
+                                if srch_proximity:
+                                    parameters_dict['item'] = words
+                                if find_quant:
+                                    diff = words - parameters_dict['item']
+                                    parameters_dict['diff'] = diff
+                                    
+
+                                print(parameters_dict)
+                            print(parameters_dict)
                         break
 
                 self.parameters.append(initial_search)
