@@ -121,8 +121,8 @@ class reader():
                         if srch_proximity:
                             amount = i
                             print(f"Found {initial_search} on same line +{amount} as first item")
-                            words_for_quant = txt_line[line_srch].split
-                            print(words_for_quant)
+                            words_for_quant = txt_line[line_srch].split()
+                            print(words_for_quant[0])
                         break
 
                 self.parameters.append(initial_search)
