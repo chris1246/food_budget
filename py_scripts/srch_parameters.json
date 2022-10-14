@@ -1,8 +1,12 @@
 {
     "stores": {
         "Netto":{
-            "start":0,
-            "end":0
+            "start_by_line":0,
+            "end_by_line":0,
+            "quantity_rel_to_title":2,
+            "price_rel_to_quantity":2
+            
+
         },
         "Føtex":{
             "start":0,

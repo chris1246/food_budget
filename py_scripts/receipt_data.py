@@ -37,6 +37,7 @@ class reader():
     def identifier(self):
         txt_line = self.lines
         
+        
         self.items_found = []
         if self.status == 0:
             keyword = list(self.search_parameters['stores'])
@@ -58,6 +59,9 @@ class reader():
                     self.on_line.append(line)
                     print(f"Keyword {keyword}, found on line {line}, with text: '{txt_line[line]}'")
                     self.item = keyword
+
+
+                    
                     
 
     def data_reader(self):
@@ -111,9 +115,15 @@ class reader():
                     
                 if i == 2:
 
-                    srch_proximity = re.search(initial_search.lower(), txt_line[line_srch].lower())
-                    if srch_proximity:
-                        print(f"Found {initial_search} on same line as first item")
+                    
+                    for i in range(len(txt_line)):
+                        srch_proximity = re.search(initial_search.lower(), txt_line[line_srch].lower())
+                        if srch_proximity:
+                            amount = i
+                            print(f"Found {initial_search} on same line +{amount} as first item")
+                            words_for_quant = txt_line[line_srch].split
+                            print(words_for_quant)
+
                 self.parameters.append(initial_search)
             elif(len(self.items_found) == 0):
                 print(f"No examples found with: {initial_search}, try again")
