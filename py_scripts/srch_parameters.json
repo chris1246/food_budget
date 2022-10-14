@@ -1,1 +1,12 @@
-{"stores": ["netto", "foetex", "f\u00f8tex", "rema1000"]}
+{
+    "stores": {
+        "Netto":{
+            "start":0,
+            "end":0
+        },
+        "Føtex":{
+            "start":0,
+            "end":0
+        }
+    }
+}
