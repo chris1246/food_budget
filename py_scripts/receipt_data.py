@@ -11,7 +11,7 @@ class reader():
             self.search_parameters = json.load(f)
         self.search_list = []
         self.on_line = []
-        self.words = []
+        self.words = [] #nested list
         
         
 
@@ -25,12 +25,11 @@ class reader():
         os.remove(f"{path}/{insertion_data}")
         self.lines = self.pageContent.split('\n')
         for lines in range(len(self.lines)):
-            self.words.append(self.lines[lines].split(' '))
+            for words_amount in range(len(self.lines[lines])):
+                    self.words.append(self.lines[words_amount].split(' '))
         print(self.words)
         for t in range(len(self.lines)):
             print(f"Line: {t}: {self.lines[t]}")
-        #for word_amount in self.words:
-        #    print(f"Word: {word_amount}: {self.words[word_amount]}")
         self.status = 0
         self.store_identifier()
         if(len(self.items_found) > 0):
