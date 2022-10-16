@@ -26,7 +26,7 @@ class reader():
         for t in range(len(self.lines)):
             print(f"Line: {t}: {self.lines[t]}")
         self.status = 0
-        self.identifier()
+        self.store_identifier()
         if(len(self.items_found) > 0):
 
             self.data_reader()
