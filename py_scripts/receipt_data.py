@@ -24,14 +24,8 @@ class reader():
         self.pageContent = page.extractText()
         os.remove(f"{path}/{insertion_data}")
         self.lines = self.pageContent.split('\n')
-<<<<<<< HEAD
-
         for lines in range(len(self.lines)):
-
             self.words.append(self.lines[lines].split(' '))
-=======
-        self.words = self.lines.split(' ')
->>>>>>> 67d5e5f48daad3f42130d3f129284f234efb1549
         print(self.words)
         for t in range(len(self.lines)):
             print(f"Line: {t}: {self.lines[t]}")
