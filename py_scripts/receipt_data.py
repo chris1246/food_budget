@@ -115,7 +115,7 @@ class reader():
 
             if(len(self.items_found) == 0):
                 #print(f"Found {len(self.items_found)} examples of {initial_search}")
-                gathered_dict[f'{for_dict[i]}':f'{self.items_found}']
+                gathered_dict[f'{for_dict[i]}'] = self.items_found
                 print(gathered_dict)
 
 
