@@ -24,10 +24,11 @@ class reader():
         os.remove(f"{path}/{insertion_data}")
         self.lines = self.pageContent.split('\n')
         self.words = self.pageContent.split(' ')
+        print(self.words)
         for t in range(len(self.lines)):
             print(f"Line: {t}: {self.lines[t]}")
-        for word in self.words:
-            print(f"Word: {word}: {self.words[word]}")
+        #for word_amount in self.words:
+        #    print(f"Word: {word_amount}: {self.words[word_amount]}")
         self.status = 0
         self.store_identifier()
         if(len(self.items_found) > 0):
