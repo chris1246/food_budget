@@ -65,7 +65,7 @@ class reader():
                 self.item = keyword
 
 
-        txt_words = txt_line.split()
+        txt_words = txt_line.split(' ')
 
         for word in txt_words:
             print(f"Position: {word}, Word: {txt_words[word]}")
