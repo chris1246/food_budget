@@ -113,10 +113,10 @@ class reader():
             self.search_list.clear()
             print(self.items_found)
 
-            if(len(self.items_found) == 0):
+            if(len(self.items_found) == 1):
                 #print(f"Found {len(self.items_found)} examples of {initial_search}")
                 gathered_dict[f'{for_dict[i]}'] = self.items_found
-                print(gathered_dict)
+                print(f'Dict: {gathered_dict}')
 
 
                 if i == 1:
