@@ -23,8 +23,11 @@ class reader():
         self.pageContent = page.extractText()
         os.remove(f"{path}/{insertion_data}")
         self.lines = self.pageContent.split('\n')
+        self.words = self.pageContent.split(' ')
         for t in range(len(self.lines)):
             print(f"Line: {t}: {self.lines[t]}")
+        for word in self.words:
+            print(f"Word: {word}: {self.words[word]}")
         self.status = 0
         self.store_identifier()
         if(len(self.items_found) > 0):
@@ -65,10 +68,8 @@ class reader():
                 self.item = keyword
 
 
-        txt_words = txt_line.split(' ')
-
-        for word in txt_words:
-            print(f"Position: {word}, Word: {txt_words[word]}")
+        
+        
         
 
 
