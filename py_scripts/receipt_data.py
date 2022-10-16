@@ -120,7 +120,7 @@ class reader():
             self.search_list.append(initial_search)
 
             self.status = 1
-            self.store_identifier()
+            self.self.keyword_identifier()
             self.search_list.clear()
             print(self.items_found)
 
