@@ -34,9 +34,8 @@ class reader():
             print("no stores found")
             self.parameters_creator()
 
-    def identifier(self):
+    def store_identifier(self):
         txt_line = self.lines
-        
         
         self.items_found = []
         if self.status == 0:
@@ -49,16 +48,28 @@ class reader():
                         self.items_found.append(keyword[keywords])
                         #print(f"Keyword {keyword[keywords]}, found on line {line}, with text: '{txt_line[line]}'")
                         self.item = keyword[keywords]
-        else:
-            keyword = self.search_list[0]
-            for line in range(len(txt_line)):
-                initiate = re.search(keyword.lower(), txt_line[line].lower())
-                #print(f"Searched: {txt_line[line].lower()} for {keyword.lower()}")
-                if initiate:
-                    self.items_found.append(keyword)
-                    self.on_line.append(line)
-                    print(f"Keyword {keyword}, found on line {line}, with text: '{txt_line[line]}'")
-                    self.item = keyword
+            
+    def keyword_identifier(self):
+        txt_line = self.lines
+        keyword = self.search_list[0]
+
+        self.srch_output = {}
+
+        for line in range(len(txt_line)):
+            initiate = re.search(keyword.lower(), txt_line[line].lower())
+            #print(f"Searched: {txt_line[line].lower()} for {keyword.lower()}")
+            if initiate:
+                self.items_found.append(keyword)
+                self.on_line.append(line)
+                print(f"Keyword {keyword}, found on line {line}, with text: '{txt_line[line]}'")
+                self.item = keyword
+
+
+        txt_words = txt_line.split()
+
+        for word in txt_words:
+            print(f"Position: {word}, Word: {txt_words[word]}")
+        
 
 
                     
@@ -72,7 +83,7 @@ class reader():
         store_name = input("Input name of store: ")
         self.search_list.append(store_name)
         self.status = 1
-        self.identifier()
+        self.keyword_identifier()
         self.search_list.clear()
         print(self.items_found)
         if(len(self.items_found) > 0):
@@ -109,7 +120,7 @@ class reader():
             self.search_list.append(initial_search)
 
             self.status = 1
-            self.identifier()
+            self.store_identifier()
             self.search_list.clear()
             print(self.items_found)
 
@@ -140,7 +151,6 @@ class reader():
                                     parameters_dict['quant'] = words_for_line[words]
                                     parameters_dict['quant_loc'] = words
                                 print(parameters_dict)
-                                
                         break
 
                 self.parameters.append(initial_search)
