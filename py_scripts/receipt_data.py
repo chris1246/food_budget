@@ -27,8 +27,8 @@ class reader():
         self.lines = self.pageContent.split('\n')
         for lines in range(len(self.lines)):
             _.append(self.lines[lines].split(' '))
-            for words_amount in range(len(self.lines[lines])):
-                    self.words.append(_[words_amount].split(' '))
+            for words_amount in range(len(_[lines])):
+                self.words.append(_[words_amount].split(' '))
         print(self.words)
         for t in range(len(self.lines)):
             print(f"Line: {t}: {self.lines[t]}")
