@@ -26,9 +26,7 @@ class reader():
         os.remove(f"{path}/{insertion_data}")
         self.lines = self.pageContent.split('\n')
         for lines in range(len(self.lines)):
-            _.append(self.lines[lines].split(' '))
-            for words_amount in range(len(_[lines])):
-                self.words.append(_[words_amount].split(' '))
+            self.words.append(self.lines[lines].split(' '))
         print(self.words)
         for t in range(len(self.lines)):
             print(f"Line: {t}: {self.lines[t]}")
