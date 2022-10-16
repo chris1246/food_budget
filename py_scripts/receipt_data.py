@@ -17,6 +17,7 @@ class reader():
 
     def reciever(self, insertion_data, sender, path):
         self.sender = sender
+        _ = []
         #print(self.sender[0])
         pdfFile = f"{path}/{insertion_data}"
         pdfRead = PyPDF2.PdfFileReader(pdfFile)
@@ -25,8 +26,9 @@ class reader():
         os.remove(f"{path}/{insertion_data}")
         self.lines = self.pageContent.split('\n')
         for lines in range(len(self.lines)):
+            _.append(self.lines[lines].split(' '))
             for words_amount in range(len(self.lines[lines])):
-                    self.words.append(self.lines[words_amount].split(' '))
+                    self.words.append(_[words_amount].split(' '))
         print(self.words)
         for t in range(len(self.lines)):
             print(f"Line: {t}: {self.lines[t]}")
