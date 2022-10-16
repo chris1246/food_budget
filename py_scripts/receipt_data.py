@@ -97,27 +97,33 @@ class reader():
             self.store_creator()
 
     def parameters_creator(self):
-        indexes = ['Input name of store: ','Enter the name of the first item: ','Enter quantity of first item: ','Enter price of first item: ','Enter the name of the last item: ']
+        entrys = ['Input name of store: ','Enter the name of the first item: ','Enter quantity of first item: ','Enter price of first item: ','Enter the name of the last item: ']
+        for_dict = ['name_store', 'name_start', 'quantity', 'price', 'name_end']
         self.parameters = []
         parameters_dict = {}
+        gathered_dict = {}
+
         txt_line = self.lines
-        for i in range(len(indexes)):
-            initial_search = input(f"{indexes[i]}")
+        for i in range(len(entrys)):
+            initial_search = input(f"{entrys[i]}")
             self.search_list.append(initial_search)
+
             self.status = 1
             self.identifier()
             self.search_list.clear()
             print(self.items_found)
-            if(len(self.items_found) > 0):
 
+            if(len(self.items_found) == 0):
                 #print(f"Found {len(self.items_found)} examples of {initial_search}")
+                gathered_dict[f'{for_dict[i]}':f'{self.items_found}']
+                print(gathered_dict)
+
+
                 if i == 1:
                     #index_range = len[self.on_line]
                     line_srch = self.on_line[len(self.on_line)-1]
-                    
                 if i == 2:
-                    for i in range(len(txt_line)):
-                        
+                    for i in range(len(txt_line)): 
                         srch_proximity = re.search(initial_search.lower(), txt_line[line_srch].lower())
                         if srch_proximity:
                             amount = i
@@ -125,11 +131,12 @@ class reader():
                             print(f"Found {initial_search} on same line +{amount} as first item")
                             words_for_line = txt_line[line_srch].split()
                             for words in range(len(words_for_line)):
-                                find_quant_on_line = re.search(initial_search, words_for_line[words])
+                                extract_item = re.search(initial_search, words_for_line[words])
+                                extract_quantity = re.search(initial_search.lower(), txt_line[line_srch].lower())
                                 if srch_proximity:
                                     parameters_dict['item'] = words_for_line[words]
                                     parameters_dict['item_loc'] = words
-                                if find_quant_on_line:
+                                if extract_quantity:
                                     parameters_dict['quant'] = words_for_line[words]
                                     parameters_dict['quant_loc'] = words
                                 print(parameters_dict)
