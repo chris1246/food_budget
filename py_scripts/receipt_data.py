@@ -23,7 +23,7 @@ class reader():
         self.pageContent = page.extractText()
         os.remove(f"{path}/{insertion_data}")
         self.lines = self.pageContent.split('\n')
-        self.words = self.pageContent.split(' ', '\n')
+        self.words = self.lines.split(' ')
         print(self.words)
         for t in range(len(self.lines)):
             print(f"Line: {t}: {self.lines[t]}")
