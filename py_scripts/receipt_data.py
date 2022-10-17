@@ -13,8 +13,6 @@ class reader():
         self.on_line = []
         self.words = [] #nested list
         
-        
-
     def reciever(self, insertion_data, sender, path):
         self.sender = sender
         _ = []
@@ -68,7 +66,6 @@ class reader():
                 self.item = keyword
                 self.words_finder(line, keyword)
                 
-
     def data_reader(self):
         self.items_found.clear()
         print(f"Store: {self.item}")
@@ -82,19 +79,7 @@ class reader():
         print(self.items_found)
         if(len(self.items_found) > 0):
             print(f"Found {len(self.items_found)} examples of {store_name}")
-
-            #current_keywords = self.search_parameters['stores']
-            #print(current_keywords)
-            #current_keywords.append(f"{store_name}")
-            #print(current_keywords)
-            #print(json.dumps(self.search_parameters))
-            #json.dump(current_keywords, self.json_file)
-            #with open(self.json_file, 'w') as out_file:
-            #    out = json.dumps(self.search_parameters)
-            #    out_file.write(out)
-
             self.store_name = store_name
-
             self.parameters_creator()     
         elif(len(self.items_found) == 0):
             print(f"No examples found with: {store_name}, try again")
@@ -140,8 +125,6 @@ class reader():
                 print(f"No examples found with: {initial_search}, try again")
                 self.parameters_creator()
         
-        
-        #parameters_dict['search_start'] = self.lines[loc_dict['line_for_item']-1]
         start = self.lines[loc_dict['line_for_item']-1]
         end = self.lines[loc_dict['line_for_last']+1]
         diff_itemq = loc_dict['word_for_quantity'] - loc_dict['word_for_item']
@@ -150,12 +133,10 @@ class reader():
         parameters_dict = {'search_start': start, 'search_end': end[0:16], 'item_to_q_diff': diff_itemq, 'item_to_p_diff': diff_itemp}
         store = f'{gathered_dict["name_store"]}'
         print(parameters_dict)
-        #print(f"location dict: {loc_dict}")
+
         start_line = loc_dict['line_for_item']
         end_line = loc_dict['line_for_last']
 
-        #current_keywords = self.search_parameters['stores']
-        #print(current_keywords)
         if start_line > end_line:
             print("Error, Last item initiated before first item")
             self.parameters_creator()
