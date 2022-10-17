@@ -57,9 +57,7 @@ class reader():
     def keyword_identifier(self):
         txt_line = self.lines
         keyword = self.search_list[0]
-
         self.srch_output = {}
-
         for line in range(len(txt_line)):
             initiate = re.search(keyword.lower(), txt_line[line].lower())
             #print(f"Searched: {txt_line[line].lower()} for {keyword.lower()}")
@@ -68,15 +66,8 @@ class reader():
                 self.on_line.append(line)
                 print(f"Keyword {keyword}, found on line {line}, with text: '{txt_line[line]}'")
                 self.item = keyword
-
-
-        
-        
-        
-
-
-                    
-                    
+                self.words_finder(line, keyword)
+                
 
     def data_reader(self):
         self.items_found.clear()
@@ -110,77 +101,75 @@ class reader():
             
             self.store_creator()
 
+    def words_finder(self, line, keyword):
+        self.words_dict = {}
+        for num in range(len(self.words[line])):
+            find_word = re.search(keyword, self.words[line][num].lower())
+            if find_word:
+                self.words_dict['line'] = line
+                self.words_dict['word_num'] = num
+
+
     def parameters_creator(self):
-        entrys = ['Input name of store: ','Enter the name of the first item: ','Enter quantity of first item: ','Enter price of first item: ','Enter the name of the last item: ']
-        for_dict = ['name_store', 'name_start', 'quantity', 'price', 'name_end']
+        entrys = ['Input name of store: ','Enter the name of the first item: ','Enter quantity of first item (if not marked, leave empty): ','Enter price of first item: ','Enter the name of the last item: ']
+        for_gathered_dict = ['name_store', 'name_start', 'quantity', 'price', 'name_end']
+        for_loc_dict = [['line_for_store', 'word_for_store'],['line_for_item','word_for_item'],['line_for_quantity','word_for_quantity'],['line_for_price','word_for_price'],['line_for_last','word_for_last']]
         self.parameters = []
         parameters_dict = {}
         gathered_dict = {}
+        loc_dict = {}
+        
 
         txt_line = self.lines
         for i in range(len(entrys)):
             initial_search = input(f"{entrys[i]}")
             self.search_list.append(initial_search)
-
             self.status = 1
             self.keyword_identifier()
             self.search_list.clear()
             print(self.items_found)
-
             if(len(self.items_found) > 0):
-                #print(f"Found {len(self.items_found)} examples of {initial_search}")
-                gathered_dict[f'{for_dict[i]}'] = self.items_found
+                gathered_dict[f'{for_gathered_dict[i]}'] = self.words[self.words_dict['line']][self.words_dict['word_num']]
                 print(f'Dict: {gathered_dict}')
-
-
-                if i == 1:
-                    #index_range = len[self.on_line]
-                    line_srch = self.on_line[len(self.on_line)-1]
-                if i == 2:
-                    for i in range(len(txt_line)): 
-                        srch_proximity = re.search(initial_search.lower(), txt_line[line_srch].lower())
-                        if srch_proximity:
-                            amount = i
-                            parameters_dict['line'] = self.lines[line_srch]
-                            print(f"Found {initial_search} on same line +{amount} as first item")
-                            words_for_line = txt_line[line_srch].split()
-                            for words in range(len(words_for_line)):
-                                extract_item = re.search(initial_search, words_for_line[words])
-                                extract_quantity = re.search(initial_search.lower(), txt_line[line_srch].lower())
-                                if srch_proximity:
-                                    parameters_dict['item'] = words_for_line[words]
-                                    parameters_dict['item_loc'] = words
-                                if extract_quantity:
-                                    parameters_dict['quant'] = words_for_line[words]
-                                    parameters_dict['quant_loc'] = words
-                                print(parameters_dict)
-                        break
-
+                criteria = [self.words_dict['line'], self.words_dict['word_num']]
+                for pos in range(2):
+                    loc_dict[for_loc_dict[i][pos]] = criteria[pos]   
+                
                 self.parameters.append(initial_search)
             elif(len(self.items_found) == 0):
                 print(f"No examples found with: {initial_search}, try again")
-                
                 self.parameters_creator()
-            
-                #enter first item
-                #enter last item
-        start_line = self.on_line[1]
-        print(f"start_line{start_line}")
-        end_line = self.on_line[4]
-        print(f"end_line{end_line}")
+        
+        
+        #parameters_dict['search_start'] = self.lines[loc_dict['line_for_item']-1]
+        start = self.lines[loc_dict['line_for_item']-1]
+        end = self.lines[loc_dict['line_for_last']+1]
+        diff_itemq = loc_dict['word_for_quantity'] - loc_dict['word_for_item']
+        diff_itemp = loc_dict['word_for_price'] - loc_dict['word_for_item']
+        
+        parameters_dict = {'search_start': start, 'search_end': end[0:16], 'item_to_q_diff': diff_itemq, 'item_to_p_diff': diff_itemp}
+        store = f'{gathered_dict["name_store"]}'
+        print(parameters_dict)
+        #print(f"location dict: {loc_dict}")
+        start_line = loc_dict['line_for_item']
+        end_line = loc_dict['line_for_last']
 
-        print(self.parameters)
-        current_keywords = self.search_parameters['stores']
-        print(current_keywords)
-        print(self.on_line)
+        #current_keywords = self.search_parameters['stores']
+        #print(current_keywords)
         if start_line > end_line:
             print("Error, Last item initiated before first item")
             self.parameters_creator()
+        else:
+            self.upload_to_json(store, parameters_dict)
 
-        
-        
-        
-        
-        
-        
-        
+
+    def upload_to_json(self, store, dict):
+        current_keywords = self.search_parameters['stores']
+        print(current_keywords)
+        current_keywords[store] = dict
+        print(current_keywords)
+        print(json.dumps(self.search_parameters))
+        #json.dump(current_keywords, self.json_file)
+        with open(self.json_file, 'w') as out_file:
+            out = json.dumps(self.search_parameters)
+            out_file.write(out)
