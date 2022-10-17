@@ -32,11 +32,9 @@ class creator():
             print(self.items_found)
             if(len(self.items_found) > 0):
                 gathered_dict[f'{for_gathered_dict[i]}'] = self.words[self.words_dict['line']][self.words_dict['word_num']]
-                print(f'Dict: {gathered_dict}')
                 criteria = [self.words_dict['line'], self.words_dict['word_num']]
                 for pos in range(2):
                     loc_dict[for_loc_dict[i][pos]] = criteria[pos]   
-                
                 self.parameters.append(initial_search)
             elif(len(self.items_found) == 0):
                 print(f"No examples found with: {initial_search}, try again")
@@ -59,8 +57,7 @@ class creator():
             self.parameters_creator()
         else:
             self.upload_to_json(store, parameters_dict)
-
-                        
+             
     def keyword_identifier(self):
         txt_line = self.lines
         keyword = self.search_list[0]
@@ -71,11 +68,8 @@ class creator():
             if initiate:
                 self.items_found.append(keyword)
                 self.on_line.append(line)
-                print(f"Keyword {keyword}, found on line {line}, with text: '{txt_line[line]}'")
                 self.item = keyword
                 self.words_finder(line, keyword)
-                
-
 
     def store_creator(self):
         store_name = input("Input name of store: ")
@@ -103,9 +97,7 @@ class creator():
 
     def upload_to_json(self, store, dict):
         current_keywords = self.search_parameters['stores']
-        print(current_keywords)
         current_keywords[store] = dict
-        print(current_keywords)
         print(json.dumps(self.search_parameters))
         #json.dump(current_keywords, self.json_file)
         with open(self.json_file, 'w') as out_file:
