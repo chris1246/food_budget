@@ -1,1 +1,1 @@
-{"stores": {"Netto": {"start_by_line": 0, "end_by_line": 0, "quantity_rel_to_title": 2, "price_rel_to_quantity": 2}, "F\u00f8tex": {"start": 0, "end": 0}, "REMA1000": {"search_start": "Beskrivelse Antal Pris", "search_end": "I alt inkl. moms", "item_to_q_diff": 1, "item_to_p_diff": 2}}}
+{"stores": {"REMA1000": {"search_start": "Beskrivelse Antal Pris", "search_end": "I alt inkl. moms", "item_to_q_diff": 1, "item_to_p_diff": 2}, "F\u00f8tex": {"search_start": "5Beskrivelse Antal Pris", "search_end": "I alt inkl. moms", "item_to_q_diff": 1, "item_to_p_diff": 2}}}
