@@ -1,3 +1,9 @@
+# File: create_parameters.py     Function: upload parameters to json   Type: script
+# 
+# Script input parameters:
+#   lines, items_found, words
+#
+# 
 import re
 import json
 
@@ -11,16 +17,20 @@ class creator():
         self.words = [] #nested list
     
     def parameters_creator(self, lines, items_found, words):
+        
+        #input parameters
         self.items_found = items_found
         self.lines = lines
         self.words = words
+
+
         entrys = ['Input name of store: ','Enter the name of the first item: ','Enter quantity of first item (if not marked, leave empty): ','Enter price of first item: ','Enter the name of the last item: ']
         for_gathered_dict = ['name_store', 'name_start', 'quantity', 'price', 'name_end']
         for_loc_dict = [['line_for_store', 'word_for_store'],['line_for_item','word_for_item'],['line_for_quantity','word_for_quantity'],['line_for_price','word_for_price'],['line_for_last','word_for_last']]
-        self.parameters = []
-        parameters_dict = {}
-        gathered_dict = {}
-        loc_dict = {}
+        self.parameters = [] #?
+        parameters_dict = {} # dictionairy fo uploading to json
+        gathered_dict = {} # dictionairy for retrieved user inputs
+        loc_dict = {} #Dictionairy for locations of gathered_dict
 
         txt_line = self.lines
         for i in range(len(entrys)):
@@ -67,7 +77,7 @@ class creator():
             #print(f"Searched: {txt_line[line].lower()} for {keyword.lower()}")
             if initiate:
                 self.items_found.append(keyword)
-                self.on_line.append(line)
+                self.on_line.append(line) #relevance?
                 self.item = keyword
                 self.words_finder(line, keyword)
 
