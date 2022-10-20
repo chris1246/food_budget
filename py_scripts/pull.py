@@ -13,6 +13,7 @@ import retrieve_hidden_info
 
 class gateway():
     def __init__(self) -> None:
+        print("init")
         self.data = retrieve_hidden_info.json_data() 
         self.mariadb_connection = mariadb.connect(user=f'{self.data.retrieve("user")}', 
                                     password=f'{self.data.retrieve("password")}', 
@@ -23,6 +24,7 @@ class gateway():
         self.rettieve()
 
     def retrieve(self):
+        print("retrieve")
         sql_statement = 'SELECT * from test_table'
         self.create_cursor.execute(sql_statement)
         myresult = self.create_cursor.fetchall()#create_cursor.fetchall() #fetchone() 
