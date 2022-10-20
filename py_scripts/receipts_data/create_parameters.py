@@ -1,5 +1,5 @@
-# File: create_parameters.py     Function: upload parameters to json   Type: script
-# 
+# File: create_parameters.py     Function: from user input, create search parameters   Type: script
+# Initiated by: receipt_data
 # Script input parameters:
 #   lines, items_found, words
 #

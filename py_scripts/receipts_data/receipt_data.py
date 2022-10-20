@@ -1,3 +1,8 @@
+# File: receipt_data.py     Function: extract data from pdf receipts   Type: script
+# Initiated by: mail_checker.py
+# Script input parameters:
+#   Insertion_data, sender, path
+#
 import PyPDF2
 from datetime import datetime
 import re
