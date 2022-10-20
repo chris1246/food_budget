@@ -1,4 +1,4 @@
-# File: pull.py     Function: db uploader   Type: script
+# File: pull.py     Function: db retriever   Type: script
 # 
 # Script input parameters:
 #   object.verify(data, table)
@@ -29,3 +29,6 @@ class gateway():
         self.create_cursor.execute(sql_statement)
         myresult = self.create_cursor.fetchall()#create_cursor.fetchall() #fetchone() 
         print(myresult)
+
+if __name__ == "__main__":
+    app = gateway()
