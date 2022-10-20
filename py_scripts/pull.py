@@ -20,5 +20,10 @@ class gateway():
                                     host=f'{self.data.retrieve("host")}', 
                                     port=f'{self.data.retrieve("port")}')
         self.create_cursor = self.mariadb_connection.cursor()
+        self.rettieve()
 
-    
+    def retrieve(self):
+        sql_statement = 'SELECT * from test_table'
+        self.create_cursor.execute(sql_statement)
+        myresult = self.create_cursor.fetchall()#create_cursor.fetchall() #fetchone() 
+        print(myresult)
